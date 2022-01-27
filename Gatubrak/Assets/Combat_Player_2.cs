@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Combat : MonoBehaviour
+public class Combat_Player_2 : MonoBehaviour
 {
 
     public Animator animator;
@@ -16,15 +16,15 @@ public class Player_Combat : MonoBehaviour
 
     void Update()
     {
-        if(Time.time >= nextAttackTime)
+        if (Time.time >= nextAttackTime)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.End))
             {
                 Punch();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        
+
     }
 
     void Punch()
@@ -32,19 +32,19 @@ public class Player_Combat : MonoBehaviour
         animator.SetTrigger("Punch");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        
-        foreach(Collider2D enemy in hitEnemies)
+
+        foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
         }
-    
+
     }
 
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
             return;
-        
+
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
