@@ -18,7 +18,7 @@ public class Combat_Player_2 : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetKeyDown(KeyCode.End))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Punch();
                 nextAttackTime = Time.time + 1f / attackRate;

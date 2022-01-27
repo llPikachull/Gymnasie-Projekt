@@ -14,27 +14,29 @@ public class Movement_Player_2 : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
+
     private void Update()
     {
-        var movement = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementSpeed;
+            Vector3 characterScale = transform.localScale;
+            if (Input.GetKeyDown(KeyCode.A) == true)
+            { 
+                characterScale.x = -1;
+            }
 
-        if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
-        {
-            _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-        }
+            if (Input.GetKeyDown(KeyCode.D) == true)
+            {
+                characterScale.x = 1;
+            }
+            transform.localScale = characterScale;
 
-        Vector3 characterScale = transform.localScale;
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            characterScale.x = -1;
-        }
-
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            characterScale.x = 1;
-        }
-        transform.localScale = characterScale;
+            if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
+            {
+                _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            }
+        
+        
+        
+       
     }
 }
 

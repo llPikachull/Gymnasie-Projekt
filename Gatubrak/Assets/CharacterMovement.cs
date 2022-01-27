@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        var movement = Input.GetAxis("Horizontal");
+        Input.GetKeyDown(KeyCode.A)
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementSpeed;
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
