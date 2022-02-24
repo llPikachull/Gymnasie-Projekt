@@ -14,6 +14,14 @@ public class Player_Combat : MonoBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
+    public int maxHealth = 100;
+    int currentHealth;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
     void Update()
     {
         if(Time.time >= nextAttackTime)
@@ -33,9 +41,10 @@ public class Player_Combat : MonoBehaviour
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         
-        foreach(Collider2D enemy in hitEnemies)
+
+        foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            enemy.GetComponent<Combat_Player_2>().TakeDamage(attackDamage);
         }
     
     }
@@ -48,4 +57,17 @@ public class Player_Combat : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("Player1 died!");
+    }
 }
